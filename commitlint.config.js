@@ -1,4 +1,4 @@
-const typeEnum = ['chore', 'feat', 'fix', 'docs', 'style', 'refactor', 'test', 'revert', 'codestyle', 'package', 'build'];
+const typeEnum = ['chore', 'webpack', 'feat', 'fix', 'docs', 'style', 'refactor', 'test', 'revert', 'codestyle', 'package', 'build'];
 
 module.exports = {
   extends: ['@commitlint/config-conventional'],
