@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "serve": "cross-env NODE_ENV=development webpack serve",
-    "build": "cross-env NODE_ENV=production webpack",
+    "serve": "cross-env NODE_ENV=development webpack serve --config ./webpack/webpack.config.js",
+    "build": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.config.js",
     "fix": "yarn fix:eslint && yarn fix:prettier && yarn fix:stylelint",
     "fix:eslint": "eslint **/*.{js,ts} --fix",
     "fix:prettier": "prettier --write **/*.{js,ts,css,sass,scss}",

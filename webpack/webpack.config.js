@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: './src/app.ts',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, '../dist'),
     filename: '[name].[hash].bundle.js',
   },
   resolve: {
@@ -19,7 +19,7 @@ module.exports = {
     port: 3000,
     open: true,
   },
-  devtool: 'inline-source-map',
+  devtool: process.env.NODE_ENV === 'development' ? 'inline-source-map' : false,
   module: {
     rules: [
       {
@@ -70,9 +70,8 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: '**/*',
-          context: path.resolve(__dirname, 'src', 'static'),
-          to: './static',
+          from: 'src/static',
+          to: 'static',
         },
       ],
     }),
