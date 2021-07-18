@@ -1,8 +1,25 @@
+// Config files
+require('../postcss.config');
+
+// Node
 const path = require('path');
+const fs = require('fs');
+
+// Plugins
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+// Custom
+const PATHS = {
+  src: path.join(__dirname, '../src'),
+  dist: path.join(__dirname, '../dist'),
+  assets: 'pug/',
+};
+
+const PAGES_DIR = `${PATHS.src}/${PATHS.assets}pages/`;
+const PAGES = fs.readdirSync(PAGES_DIR).filter((fileName) => fileName.endsWith('.pug'));
 
 module.exports = {
   entry: './src/app.ts',
@@ -84,5 +101,12 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'style-[hash].css',
     }),
+    ...PAGES.map(
+      (page) =>
+        new HtmlWebpackPlugin({
+          template: `${PAGES_DIR}/${page}`,
+          filename: `./${page.replace(/\.pug/, '.html')}`,
+        }),
+    ),
   ],
 };
