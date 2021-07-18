@@ -1,11 +1,37 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "strict": true,
+    "outDir": "./dist",
     "sourceMap": true,
     "noImplicitAny": true,
-    "module": "es6",
     "target": "es6",
+    "module": "commonjs",
     "allowJs": true,
-    "moduleResolution": "node"
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "moduleResolution": "node",
+    "declaration": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "rules": {
+    "max-line-length": [
+      true,
+      140
+    ],
+    "no-console": false,
+    "quotemark": [
+      true,
+      "single"
+    ]
   }
 }
