@@ -1,8 +1,8 @@
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { extendDefaultPlugins } = require('svgo');
 const { merge } = require('webpack-merge');
 
@@ -16,6 +16,7 @@ module.exports = merge(webpackCommon, {
   devtool: false,
 
   plugins: [
+    new CleanWebpackPlugin(),
     new ImageMinimizerPlugin({
       test: /\.(jpe?g|png|gif|svg)$/i,
       minimizerOptions: {
