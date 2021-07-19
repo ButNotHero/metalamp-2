@@ -1,42 +1,22 @@
-// Config files
-require('../postcss.config');
-
-// Node
-const path = require('path');
-const fs = require('fs');
-
 // Plugins
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // Custom
-const PATHS = {
-  src: path.join(__dirname, '../src'),
-  dist: path.join(__dirname, '../dist'),
-  assets: 'pug/',
-};
-
-const PAGES_DIR = `${PATHS.src}/${PATHS.assets}pages/`;
-const PAGES = fs.readdirSync(PAGES_DIR).filter((fileName) => fileName.endsWith('.pug'));
+const paths = require('./utils/paths');
+const { pagesHtml } = require('./utils/pages');
 
 module.exports = {
-  entry: './src/app.ts',
+  entry: `${paths.src}/app.ts`,
   output: {
-    path: path.resolve(__dirname, '../dist'),
-    filename: '[name].[hash].bundle.js',
+    path: paths.build,
+    filename: 'js/[name].[contenthash].bundle.js',
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-  devServer: {
-    contentBase: 'dist',
-    compress: true,
-    port: 3000,
-    open: true,
-  },
-  devtool: process.env.NODE_ENV === 'development' ? 'inline-source-map' : false,
+
   module: {
     rules: [
       {
@@ -87,26 +67,19 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/static',
+          from: paths.static,
           to: 'static',
+          globOptions: {
+            dot: true,
+            gitignore: true,
+            ignore: ['**/*.DS_Store', '**/*.gitkeep'],
+          },
         },
       ],
     }),
-    new HtmlWebpackPlugin({
-      minify: process.env.NODE_ENV === 'production',
-      filename: 'index.html',
-      template: './src/pug/index.pug',
-      inject: true,
-    }),
     new MiniCssExtractPlugin({
-      filename: 'style-[hash].css',
+      filename: 'css/style.[contenthash].css',
     }),
-    ...PAGES.map(
-      (page) =>
-        new HtmlWebpackPlugin({
-          template: `${PAGES_DIR}/${page}`,
-          filename: `./${page.replace(/\.pug/, '.html')}`,
-        }),
-    ),
+    ...pagesHtml,
   ],
 };
