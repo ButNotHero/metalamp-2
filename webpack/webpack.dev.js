@@ -1,4 +1,3 @@
-const { HotModuleReplacementPlugin } = require('webpack');
 const { merge } = require('webpack-merge');
 const webpackCommon = require('./webpack.common');
 
@@ -20,7 +19,6 @@ module.exports = merge(webpackCommon, {
     open: false,
     overlay: true,
     compress: true,
-    hot: true,
     port: 3000,
   },
 
@@ -30,8 +28,5 @@ module.exports = merge(webpackCommon, {
     ignored: /node_modules/,
   },
 
-  plugins: [
-    // Only update wha has changed on hot reload
-    new HotModuleReplacementPlugin(),
-  ],
+  target: 'web',
 });
