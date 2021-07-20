@@ -1,3 +1,5 @@
+include ../blocks/index.pug
+
 doctype html
 html(lang='ru')
   head
@@ -20,16 +22,17 @@ html(lang='ru')
       title Default title
 
   body
-    noscript !!! Пожалуйста, включите JavaScript !!!
+    #app
+      noscript !!! Пожалуйста, включите JavaScript !!!
 
-    // Page header
-    block header
+      // Page header
+      block header
 
-    // Page main
-    block main
+      // Page main
+      block main
 
-    // Page footer
-    block footer
+      // Page footer
+      block footer
 
-    // Page scripts
-    block scripts
+      // Page scripts
+      block scripts

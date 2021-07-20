@@ -1,0 +1,14 @@
+$color-dark-shade: #1f2041;
+$color-dark-shade-100: rgba($color-dark-shade, 1);
+$color-dark-shade-75: rgba($color-dark-shade, 0.75);
+$color-dark-shade-50: rgba($color-dark-shade, 0.5);
+$color-dark-shade-25: rgba($color-dark-shade, 0.25);
+$color-dark-shade-5: rgba($color-dark-shade, 0.05);
+
+$color-purple: #bc9cff;
+$color-purple-blue: #8ba4f9;
+$color-green: #6fcf97;
+$color-blue: #66d2ea;
+
+$color-purple-gradient: linear-gradient(180deg, $color-purple 0%, $color-purple-blue 100%);
+$color-green-gradient: linear-gradient(180deg, $color-green 0%, $color-blue 100%);

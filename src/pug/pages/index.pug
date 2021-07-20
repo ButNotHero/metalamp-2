@@ -3,6 +3,16 @@ extends ../layouts/default
 block title
   title Index page
 
+block header
+  +page-header()
+    .container Header
+
 block main
-  h1 Home page
-  a(href='about.html') go to about page
+  +page-main()
+    .container
+      h1 Home page
+      a(href='about.html') go to about page
+
+block footer
+  +page-footer()
+    .container Footer

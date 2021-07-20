@@ -1,4 +1,5 @@
-h1 {
-  color: #be1209;
-  font-family: Arial, sans-serif;
-}
+@import '_vendors';
+@import '_global';
+@import '_vars';
+
+@import '@/pug/blocks';

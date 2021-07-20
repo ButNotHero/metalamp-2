@@ -1,8 +1,18 @@
-extends ../layouts/default.pug
+extends ../layouts/default
 
 block title
-  title Index page
+  title About page
+
+block header
+  +page-header()
+    .container Header
 
 block main
-  h1 About page
-  a(href='index.html') go to home page
+  +page-main()
+    .container
+      h1 About page
+      a(href='index.html') go to Home page
+
+block footer
+  +page-footer()
+    .container Footer
