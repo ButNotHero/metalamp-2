@@ -1,6 +1,7 @@
 // Plugins
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 // Custom
 const paths = require('./utils/paths');
@@ -11,6 +12,7 @@ module.exports = {
   output: {
     path: paths.build,
     filename: 'js/[name].[contenthash].bundle.js',
+    assetModuleFilename: 'assets/[name].[contenthash][ext]',
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
@@ -24,24 +26,10 @@ module.exports = {
       {
         test: /\.(js|jsx|tsx|ts)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        use: ['babel-loader'],
       },
-      {
-        test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 3000,
-          name: 'static/img/[name].[contenthash:7].[ext]',
-        },
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 5000,
-          name: 'static/fonts/[name].[contenthash:7].[ext]',
-        },
-      },
+      { test: /\.(?:ico|gif|svg|png|jpg|jpeg)$/i, type: 'asset/resource' },
+      { test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, type: 'asset/resource' },
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
@@ -65,11 +53,13 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
+
     new CopyWebpackPlugin({
       patterns: [
         {
           from: paths.static,
-          to: 'static',
+          to: '',
           globOptions: {
             dot: true,
             gitignore: true,

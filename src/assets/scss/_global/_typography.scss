@@ -1,4 +1,13 @@
+@import '../_mixins';
 @import '../_vars';
+
+// ----- START Montserrat Font -----src/static/fonts/montserrat/Montserrat-Black.eot
+@include font-face($ff-montserrat, '@/assets/fonts/montserrat/montserrat-bold-webfont', 700, normal, woff woff2 eot ttf svg);
+@include font-face($ff-montserrat, '@/assets/fonts/montserrat/montserrat-semibold-webfont', 600, normal, woff woff2 eot ttf svg);
+@include font-face($ff-montserrat, '@/assets/fonts/montserrat/montserrat-medium-webfont', 500, normal, woff woff2 eot ttf svg);
+@include font-face($ff-montserrat, '@/assets/fonts/montserrat/montserrat-regular-webfont', 400, normal, woff woff2 eot ttf svg);
+@include font-face($ff-montserrat, '@/assets/fonts/montserrat/montserrat-light-webfont', 300, normal, woff woff2 eot ttf svg);
+// ----- END Montserrat Font -----
 
 .h1 {
   color: $color-dark-shade-100;

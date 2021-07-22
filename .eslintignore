@@ -5,6 +5,8 @@
 /nginx
 /.vscode
 /.idea
+/fonts
+/font
 /assets/fonts
 k8s/*
 package-lock.json
