@@ -1,4 +1,8 @@
 mixin page-header()
 
   header.page-header()&attributes(attributes)
-    block
+    .page-header__container.container
+      .page-header__row
+        +logo('page-header')
+        +main-nav('page-header')
+

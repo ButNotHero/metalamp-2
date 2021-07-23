@@ -1,0 +1,74 @@
+mixin main-nav(mods)
+
+  include main.data.pug
+
+  -
+    var mainData = [
+      {
+        title: 'О нас',
+        link: '#',
+      },
+      {
+        title: 'Услуги',
+        link: '#',
+        children: [
+          {
+            title: 'Услуга 1',
+            link: '#',
+          },
+          {
+            title: 'Услуга 2',
+            link: '#',
+          },
+          {
+            title: 'Услуга 3',
+            link: '#',
+          },
+        ],
+      },
+      {
+        title: 'Вакансии',
+        link: '#',
+      },
+      {
+        title: 'Новости',
+        link: '#',
+      },
+      {
+        title: 'Соглашения',
+        link: '#',
+        children: [
+          {
+            title: 'Соглашение 1',
+            link: '#',
+          },
+          {
+            title: 'Соглашение 2',
+            link: '#',
+          },
+          {
+            title: 'Соглашение 3',
+            link: '#',
+          },
+        ],
+      },
+    ];
+
+    // список модификаторов
+    var allMods = '';
+    if(typeof(mods) !== 'undefined' && mods) {
+      let modsList = mods.split(',');
+      for (let i = 0; i < modsList.length; i++) {
+        allMods = allMods + 'main-nav__' + modsList[i].trim();
+      }
+    }
+
+  nav.main-nav(class=allMods)&attributes(attributes)
+   ul.main-nav__list
+       each item in mainData
+         +main-nav__item(item)
+
+
+mixin main-nav__item(item)
+  li.main-nav__item
+    a.main-nav__link(href=item.link) #{item.title}

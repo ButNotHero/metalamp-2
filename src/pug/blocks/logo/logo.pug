@@ -1,0 +1,14 @@
+mixin logo(mods)
+
+  -
+    // список модификаторов
+    var allMods = '';
+    if(typeof(mods) !== 'undefined' && mods) {
+      let modsList = mods.split(',');
+      for (let i = 0; i < modsList.length; i++) {
+        allMods = allMods + 'logo__' + modsList[i].trim();
+      }
+    }
+
+  .logo(class=allMods)&attributes(attributes)
+    img(src='img/logo.svg' alt='Toxin')
