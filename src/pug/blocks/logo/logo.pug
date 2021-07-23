@@ -6,7 +6,7 @@ mixin logo(mods)
     if(typeof(mods) !== 'undefined' && mods) {
       let modsList = mods.split(',');
       for (let i = 0; i < modsList.length; i++) {
-        allMods = allMods + 'logo__' + modsList[i].trim();
+        allMods = allMods + `logo__${modsList[i].trim()}`;
       }
     }
 

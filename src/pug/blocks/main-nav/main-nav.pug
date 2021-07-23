@@ -1,7 +1,5 @@
 mixin main-nav(mods)
 
-  include main.data.pug
-
   -
     var mainData = [
       {
@@ -59,7 +57,7 @@ mixin main-nav(mods)
     if(typeof(mods) !== 'undefined' && mods) {
       let modsList = mods.split(',');
       for (let i = 0; i < modsList.length; i++) {
-        allMods = allMods + 'main-nav__' + modsList[i].trim();
+        allMods = allMods + `main-nav__${modsList[i].trim()}`;
       }
     }
 
