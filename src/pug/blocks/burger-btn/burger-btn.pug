@@ -1,4 +1,4 @@
-mixin logo(mods)
+mixin burger-btn(mods)
 
   -
     // список модификаторов
@@ -6,10 +6,11 @@ mixin logo(mods)
     if(typeof(mods) !== 'undefined' && mods) {
       let modsList = mods.split(',');
       for (let i = 0; i < modsList.length; i++) {
-        allMods = allMods + ` logo__${modsList[i].trim()}`;
+        allMods = allMods + ` burger-btn__${modsList[i].trim()}`;
       }
     }
 
-  .logo(class=allMods)&attributes(attributes)
-    a(href='index.html')
-      img(src='img/logo.svg' alt='Toxin')
+  button.burger-btn(class=allMods)&attributes(attributes)
+    span
+    span
+    span

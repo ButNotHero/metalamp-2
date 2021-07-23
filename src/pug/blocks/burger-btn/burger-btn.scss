@@ -1,0 +1,16 @@
+.burger-btn {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  & > span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    margin: 6px auto;
+    background: $color-black;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+  }
+}

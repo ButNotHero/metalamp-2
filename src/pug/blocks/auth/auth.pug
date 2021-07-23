@@ -1,0 +1,16 @@
+mixin auth(mods)
+
+  -
+    // список модификаторов
+    var allMods = '';
+    if(typeof(mods) !== 'undefined' && mods) {
+      let modsList = mods.split(',');
+      for (let i = 0; i < modsList.length; i++) {
+        allMods = allMods + ` auth__${modsList[i].trim()}`;
+      }
+    }
+
+  .auth(class=allMods)
+    .auth__row
+      +action-btn('Войти', 'auth, sign-in')
+      +action-btn('Зарегистрироваться', 'auth, sign-up')

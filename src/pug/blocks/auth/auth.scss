@@ -1,0 +1,13 @@
+.auth {
+  $block-name: &;
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  &__page-header {
+    padding-right: 10px;
+  }
+}
