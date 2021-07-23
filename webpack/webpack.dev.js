@@ -8,7 +8,7 @@ module.exports = merge(webpackCommon, {
   mode: 'development',
 
   // Generate source maps
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-source-map',
 
   // Run dev server
   devServer: {

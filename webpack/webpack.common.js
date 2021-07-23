@@ -4,61 +4,42 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 // Custom
-const paths = require('./utils/paths');
-const { pagesHtml } = require('./utils/pages');
+const LOADERS = require('./utils/loaders');
+
+const PATHS = require('./utils/paths');
+const { PAGES, PAGES_HTML } = require('./utils/pages');
 
 module.exports = {
-  entry: `${paths.src}/app.ts`,
+  entry: (() => {
+    const entries = {};
+    PAGES.forEach((page) => (entries[page] = `${PATHS.pages}/${page}/${page}.ts`));
+    return entries;
+  })(),
+
   output: {
-    path: paths.build,
+    path: PATHS.build,
     filename: 'js/[name].[contenthash].bundle.js',
     assetModuleFilename: 'assets/[name].[contenthash][ext]',
   },
+
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
-      '@': paths.src,
+      '@': PATHS.src,
     },
   },
 
   module: {
-    rules: [
-      {
-        test: /\.(js|jsx|tsx|ts)$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
-      },
-      { test: /\.(?:ico|gif|svg|png|jpg|jpeg)$/i, type: 'asset/resource' },
-      { test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, type: 'asset/resource' },
-      {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {},
-          },
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
-        ],
-      },
-      {
-        test: /\.pug$/,
-        use: [
-          {
-            loader: 'pug-loader',
-          },
-        ],
-      },
-    ],
+    rules: LOADERS,
   },
+
   plugins: [
     new CleanWebpackPlugin(),
 
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: paths.static,
+          from: PATHS.static,
           to: '',
           globOptions: {
             dot: true,
@@ -68,9 +49,11 @@ module.exports = {
         },
       ],
     }),
+
     new MiniCssExtractPlugin({
       filename: 'css/style.[contenthash].css',
     }),
-    ...pagesHtml,
+
+    ...PAGES_HTML,
   ],
 };

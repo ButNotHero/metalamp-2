@@ -1,20 +1,21 @@
-const fs = require('fs');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const paths = require('./paths');
-const pagesDir = `${paths.src}/pug/pages/`;
-const pages = fs.readdirSync(pagesDir).filter((fileName) => fileName.endsWith('.pug'));
-const pagesHtml = pages.map(
+const PATHS = require('./paths');
+
+const PAGES = require('../../src/pug/pages');
+
+const PAGES_HTML = PAGES.map(
   (page) =>
     new HtmlWebpackPlugin({
       minify: process.env.NODE_ENV === 'production',
-      template: `${pagesDir}/${page}`,
-      filename: `./${page.replace(/\.pug/, '.html')}`,
-      inject: true,
+      template: `${PATHS.src}/pug/pages/${page}/${page}.pug`,
+      filename: `${page}.html`,
+      chunks: ['common', page],
+      inject: 'body',
     }),
 );
 
 module.exports = {
-  pagesHtml,
+  PAGES,
+  PAGES_HTML,
 };
